@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+	<title>
+		Gorilla WebSocket
+	</title>
+</head>
+
+<body>
+	<h1>Hello WebSockets<h1>
+		<input id="text1" placehonder="enter anything">
+		<!-- <input id="text1" placehonder="Password"> -->
+		<br>
+		<button onclick = "fn1()" id="btn1">Send</button>
+	<script>
+		function fn1()
+		{
+			var str = document.getElementById("text1").value;
+			alert("value inside textbox is: "+str+" is sent over websocket")
+			ws.send(str)
+		}
+		var name = window.prompt("send message")
+		document.write("hey" + name)
+		var ws = new WebSocket("ws://localhost:8080/ws")
+		ws.onopen = () => {
+			ws.send("sucess ha ha ha")
+			ws.send("foo from index2")
+			ws.send(name)
+		}
+
+		// let socket = new WebSocket("ws:/localhost:/8000/ws")
+		// console.log("Attempting WebSocket connection.")
+
+		// socket.onopen = () => {
+		// 	console.log("Sucessfully Connected");
+		// 	socket.send("hi from the client!")
+		// }
+
+		// socket.onclose = (event) => {
+		// 	console.log("socket closed connectionL ", event)
+		// }
+
+		// socket.onerror = (error) => {
+		// 	console.log("socket Error: ", error);
+		// }
+	</script>
+</body>
