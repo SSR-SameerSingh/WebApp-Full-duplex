@@ -18,7 +18,6 @@ var upgrader = websocket.Upgrader{}
 // }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	// fmt.Fprintf(w, "fuck You")
 	http.ServeFile(w, r, "index2.html")
 }
 
