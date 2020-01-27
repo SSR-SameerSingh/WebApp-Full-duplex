@@ -12,7 +12,8 @@
 		<input type="text" /><span id="msg"></span>
 		<br>
 		<button onclick = "fn1()" id="btn1">Send</button>
-		<button onclick = "fn2()" id="btn2">Connect</button>
+		<button onclick = "fn2()" id="btn2">Connect idx3</button>
+		<!-- <button onclick = "fn2_1()" id="btn2_1">Connect idx3</button> -->
 		<button onclick = "fn3()" id="btn3">Disconnect</button>
 		<button onclick = "fn4()" id="btn4">Check Message</button>
 	<script>
@@ -21,18 +22,28 @@
 		{
 			var str = document.getElementById("text1").value;
 			// alert("value inside textbox is: "+str+" is sent over websocket")
-			ws.send(str)
+			ws.send("index2:"+str)
 		}
 
 		function fn2()
 		{
-			window.ws = new WebSocket("ws://localhost:8123/ws")
+			window.ws = new WebSocket("ws://localhost:8124/ws")
 			ws.onopen = () => {
 			// ws.send("sucessful connection")
 			ws.send("index 2 connected")
 			// ws.send(name)
 			}
 		}
+
+		// function fn2_1()
+		// {
+		// 	window.ws = new WebSocket("ws://localhost:8124/ws") //8124 for index3
+		// 	ws.onopen = () => {
+		// 	// ws.send("sucessful connection")
+		// 	ws.send("index 2 connected")
+		// 	// ws.send(name)
+		// 	}
+		// }
 
 		function fn3()
 		{
