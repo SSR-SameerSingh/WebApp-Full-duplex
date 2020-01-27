@@ -9,7 +9,14 @@ import (
 	"log"
 	"github.com/gorilla/websocket"
 	"sync"
+	"time"
 )
+
+type myStruct struct {
+	Username string `json:"Username"`
+	FirstName string `json:"firstName"`
+	LastName string `json:"lastname"`
+}
 
 var wg sync.WaitGroup
 var upgrader = websocket.Upgrader{}
@@ -17,8 +24,16 @@ var upgrader = websocket.Upgrader{}
 // 	WriteBufferSize: 1024,
 // }
 
-func hello(w http.ResponseWriter, r *http.Request) {
+func index2(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "index2.html")
+}
+
+func index3(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "index3.html")
+}
+
+func index4(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "index4.html")
 }
 
 func ws(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +44,19 @@ func ws(w http.ResponseWriter, r *http.Request) {
 		log.Println(string("Checking...."))
 		log.Fatal(err)
 	}
+
+	go func(conn *websocket.Conn) {
+			ch := time.Tick(5 *time.Second)
+
+			for range ch {
+				conn.WriteJSON(myStruct{
+					Username:"ssr.sameersingh",
+					FirstName:"Sameer Singh",
+					LastName:"Rathor",
+				})
+			}
+		}(conn)
+
 	// defer conn.Close()
 	// msg := []byte("Lets start to talk something.")
 	// err = conn.WriteMessage(websocket.TextMessage, msg)
@@ -75,7 +103,10 @@ func ws(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", hello)
+	log.Println("Server Started.....")
+	http.HandleFunc("/index2", index2)
+	http.HandleFunc("/index3", index3)
+	http.HandleFunc("/index4", index4)
 	http.HandleFunc("/ws", ws)
 	http.ListenAndServe(":8080", nil)
 }

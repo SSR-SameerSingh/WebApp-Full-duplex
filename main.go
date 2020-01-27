@@ -57,7 +57,7 @@ func main() {
 
 			for range ch {
 				conn.WriteJSON(myStruct{
-					Username:"sameer",
+					Username:"ssr.sameersingh",
 					FirstName:"Sameer Singh",
 					LastName:"Rathor",
 				})

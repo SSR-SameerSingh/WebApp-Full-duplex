@@ -7,26 +7,62 @@
 </head>
 
 <body>
-	<h1>Hello WebSockets<h1>
-		<input id="text1" placehonder="enter anything">
-		<!-- <input id="text1" placehonder="Password"> -->
+	<h1>Hello WebSockets Index 2<h1>
+		<input id="text1" placeholder="enter anything">
+		<input type="text" /><span id="msg"></span>
 		<br>
 		<button onclick = "fn1()" id="btn1">Send</button>
+		<button onclick = "fn2()" id="btn2">Connect</button>
+		<button onclick = "fn3()" id="btn3">Disconnect</button>
+		<button onclick = "fn4()" id="btn4">Check Message</button>
 	<script>
+
 		function fn1()
 		{
 			var str = document.getElementById("text1").value;
-			alert("value inside textbox is: "+str+" is sent over websocket")
+			// alert("value inside textbox is: "+str+" is sent over websocket")
 			ws.send(str)
 		}
-		var name = window.prompt("send message")
-		document.write("hey" + name)
-		var ws = new WebSocket("ws://localhost:8080/ws")
-		ws.onopen = () => {
-			ws.send("sucess ha ha ha")
-			ws.send("foo from index2")
-			ws.send(name)
+
+		function fn2()
+		{
+			window.ws = new WebSocket("ws://localhost:8080/ws")
+			ws.onopen = () => {
+			// ws.send("sucessful connection")
+			ws.send("index 2 connected")
+			// ws.send(name)
+			}
 		}
+
+		function fn3()
+		{
+			ws.close()
+			ws.onclose = (event) => {
+			console.log("socket closed form index 2", event)
+			}
+			alert("Socket closed from index2.")
+		}
+
+		function fn4()
+		{
+			ws.onmessage = (event) => {
+				// alert(event.data)
+				document.getElementById("msg").innerHTML = event.data;
+				console.log("WebSocket message received:", event.data)
+			}
+		}
+		// var name = window.prompt("send message")
+		// document.write("hey" + name)
+		// var ws = new WebSocket("ws://localhost:8080/ws")
+		// ws.onopen = () => {
+		// 	// ws.send("sucessful connection")
+		// 	ws.send("foo from index 2")
+		// 	// ws.send(name)
+		// }
+
+		// ws.onclose = (event) => {
+		// 	console.log("socket closed form index 2", event)
+		// }
 
 		// let socket = new WebSocket("ws:/localhost:/8000/ws")
 		// console.log("Attempting WebSocket connection.")
