@@ -9,20 +9,9 @@
   revision = "c3e18be99d19e6b3e8f1559eea2c161a665c4b6b"
   version = "v1.4.1"
 
-[[projects]]
-  branch = "master"
-  digest = "1:7d9f75ab9c0f1fd097d3213059c545392f17189bad556640b31fb4c958dd473b"
-  name = "golang.org/x/net"
-  packages = ["websocket"]
-  pruneopts = "UT"
-  revision = "6afb5195e5aab057fda82e27171243402346b0ad"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = [
-    "github.com/gorilla/websocket",
-    "golang.org/x/net/websocket",
-  ]
+  input-imports = ["github.com/gorilla/websocket"]
   solver-name = "gps-cdcl"
   solver-version = 1
