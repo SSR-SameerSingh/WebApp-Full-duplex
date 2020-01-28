@@ -24,8 +24,8 @@ type longLatStruct struct {
 var clients = make(map[*websocket.Conn]bool)
 var broadcast = make(chan *longLatStruct)
 
-func index1(w http.ResponseWriter, r *http.Request) {
-	log.Println("index1 fun")
+func index(w http.ResponseWriter, r *http.Request) {
+	log.Println("index function")
 	http.ServeFile(w, r, "assets/index.html")
 }
 
@@ -33,7 +33,7 @@ func index1(w http.ResponseWriter, r *http.Request) {
 func ws(w http.ResponseWriter, r *http.Request) {
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	conn, err := upgrader.Upgrade(w, r, nil)
-	log.Println("connection upgraded fun")
+	log.Println("connection upgraded function")
 	clients[conn] = true
 	if err != nil {
 		log.Println(string("Checking...."))
@@ -93,7 +93,7 @@ func ws(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Server Started.....")
 
-	http.HandleFunc("/index1", index1)
+	http.HandleFunc("/index", index)
 	http.HandleFunc("/ws", ws)
 
 	http.ListenAndServe(":8123", nil)
