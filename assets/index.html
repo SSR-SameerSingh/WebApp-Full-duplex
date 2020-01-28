@@ -87,6 +87,8 @@
      * Event handler for clicking on button "Disconnect"
      */
     function onDisconnectClick() {
+        var msg = document.getElementById("username").value + " left the room.";
+        webSocket.send(msg);
         webSocket.close();
     }
     /**
@@ -106,14 +108,17 @@
                 document.getElementById("btnSend").disabled       = false;
                 document.getElementById("btnConnect").disabled    = true;
                 document.getElementById("btnDisconnect").disabled = false;
-                document.getElementById('username').disabled           = true;
+                document.getElementById('username').disabled      = true;
+
+                var msg = document.getElementById("username").value + " joined the room.";
+                webSocket.send(msg);
             };
             webSocket.onclose = function (closeEvent) {
                 console.log("WebSocket CLOSE: " + JSON.stringify(closeEvent, null, 4));
                 document.getElementById("btnSend").disabled       = true;
                 document.getElementById("btnConnect").disabled    = false;
                 document.getElementById("btnDisconnect").disabled = true;
-                document.getElementById('username').disabled           = false;
+                document.getElementById('username').disabled      = false;
             };
             webSocket.onerror = function (errorEvent) {
                 console.log("WebSocket ERROR: " + JSON.stringify(errorEvent, null, 4));
