@@ -26,23 +26,9 @@ var broadcast = make(chan *longLatStruct)
 
 func index1(w http.ResponseWriter, r *http.Request) {
 	log.Println("index1 fun")
-	http.ServeFile(w, r, "assets/index1.html")
+	http.ServeFile(w, r, "assets/index.html")
 }
 
-func index2(w http.ResponseWriter, r *http.Request) {
-	log.Println("index2 fun")
-	http.ServeFile(w, r, "assets/index2.html")
-}
-
-func index3(w http.ResponseWriter, r *http.Request) {
-	log.Println("index3 fun")
-	http.ServeFile(w, r, "assets/index3.html")
-}
-
-func index4(w http.ResponseWriter, r *http.Request) {
-	log.Println("index4 fun")
-	http.ServeFile(w, r, "assets/index4.html")
-}
 
 func ws(w http.ResponseWriter, r *http.Request) {
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
@@ -106,12 +92,9 @@ func ws(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	log.Println("Server Started.....")
+
 	http.HandleFunc("/index1", index1)
-	http.HandleFunc("/index2", index2)
-	http.HandleFunc("/index3", index3)
-	http.HandleFunc("/index4", index4)
 	http.HandleFunc("/ws", ws)
-	// http.HandleFunc("/send", ss)
 
 	http.ListenAndServe(":8123", nil)
 }
