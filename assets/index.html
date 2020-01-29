@@ -148,6 +148,7 @@
         var msg = document.getElementById("username").value + ":" + document.getElementById("message").value;
         // var user_name = document.getElementById("message").value;
         webSocket.send(msg);
+        document.getElementById('message').value = ''
     }
 
  
