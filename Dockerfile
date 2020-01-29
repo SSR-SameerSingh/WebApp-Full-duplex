@@ -1,18 +1,16 @@
-# --------------------------------------
-# Build Stage
-# --------------------------------------
-FROM golang:latest
-RUN mkdir /app 
-ENV GOPATH /go
-ADD . /go/src/github.com/SSR-SameerSingh/WebApp-Full-duplex
-WORKDIR /go/src/github.com/SSR-SameerSingh/WebApp-Full-duplex
-RUN go get -u github.com/golang/dep/cmd/dep
-RUN dep ensure
-RUN go build
+FROM golang:alpine AS build-env
 
-# --------------------------------------
-# Production Container
-# --------------------------------------
-FROM scratch
-COPY --from=build_stage /go/src/github.com/SSR-SameerSingh/WebApp-Full-duplex/WebApp-Full-duplex
-CMD [/WebApp-Full-duplex]
+WORKDIR /go-work/src
+ADD . /go-work/src/WebSockets/WebApp-Full-duplex
+RUN cd /go-work/src/WebSockets/WebApp-Full-duplex && go build -o main
+
+FROM alpine
+
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk*
+
+WORKDIR /app
+
+COPY --from=build-env /go-work/src/WebSockets/WebApp-Full-duplex /app/static
+
+EXPOSE 8080
+ENTRYPOINT [ “./main” ]

@@ -96,8 +96,8 @@
      */
     function openWSConnection(protocol, hostname, port, endpoint) {
         var webSocketURL = null;
-        // webSocketURL = protocol + "://" + hostname + ":" + port + endpoint;
-        webSocketURL = "ws://localhost:8123/ws"
+        webSocketURL = protocol + "://" + hostname + ":" + port + endpoint;
+        // webSocketURL = "ws://localhost:8123/ws"
         // webSocketURL2 = "ws://localhost:8123/send"
         console.log("openWSConnection::Connecting to: " + webSocketURL);
         try {

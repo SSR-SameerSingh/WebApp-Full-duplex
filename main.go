@@ -93,8 +93,8 @@ func ws(w http.ResponseWriter, r *http.Request) {
 func main() {
 	log.Println("Server Started.....")
 
-	http.HandleFunc("/index", index)
+	http.HandleFunc("/", index)
 	http.HandleFunc("/ws", ws)
 
-	http.ListenAndServe(":8123", nil)
+	http.ListenAndServe("35.223.8.255:8081", nil)
 }
