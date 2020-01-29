@@ -12,11 +12,11 @@ GoLang Gorilla Websockets, JavaScript and HTML
 6. Wait a moment for droplet to initialize, and copy ip address and run following command to ssh into the system: ssh -i ~\.ssh\new_key root@ip_address_of_droplet
 
 7. Once ssh is sucessfull: run following commands:
-	-Clone your epository using git clone 
-		--(or you can use scp to copy your files: scp -i ~/.ssh/my_key file_name_to_copy root@ip_addr:)
-	-sudo apt update
-	-sudo apt install golang
-	-go build -o app_name
+	* Clone your epository using git clone 
+		* (or you can use scp to copy your files: scp -i ~/.ssh/my_key file_name_to_copy root@ip_addr:)
+	* sudo apt update
+	* sudo apt install golang
+	* go build -o app_name
 8. Viola, Your app is deployed, head over to ip_address of droplet and start listening to specified port number
 
 
