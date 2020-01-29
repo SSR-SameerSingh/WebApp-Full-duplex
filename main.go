@@ -96,5 +96,5 @@ func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/ws", ws)
 
-	http.ListenAndServe("35.223.8.255:8081", nil)
+	http.ListenAndServe(":8081", nil)
 }
