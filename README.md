@@ -16,7 +16,10 @@ GoLang Gorilla Websockets, JavaScript and HTML
 		* (or you can use scp to copy your files: scp -i ~/.ssh/new_key file_name_to_copy root@ip_addr:)
 	* sudo apt update
 	* sudo apt install golang
-	* go build -o app_name
+	* go get 
+	* Install gorilla websockets using:
+		* go get github.com/gorilla/websocket
+	* Go build -o app_name
 8. Viola, Your app is deployed, head over to ip_address of droplet and start listening to specified port number
 
 
